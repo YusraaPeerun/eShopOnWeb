@@ -6,8 +6,7 @@ using OpenQA.Selenium.Chrome;
 using TechTalk.SpecFlow;
 
 namespace eShopOnWeb.Test.StepDefinitions
-{
-    
+{   
     public class logInTestingStepDefinitions
     {
         public IWebDriver driver = new ChromeDriver();
@@ -22,13 +21,13 @@ namespace eShopOnWeb.Test.StepDefinitions
         }
 
         [Given(@"User enters email address (.*)")]
-        public void GivenUserEntersEmailAddressDemouserMicrosoft_Com(String email)
+        public void GivenUserEntersEmailAddress(String email)
         {
             logInpg.enterEmail(driver,email);
         }
 
         [Given(@"User enters Password (.*)")]
-        public void GivenUserEntersPasswordPassWord(String password)
+        public void GivenUserEntersPassword(String password)
         {
             logInpg.enterPassword(driver, password);
         }

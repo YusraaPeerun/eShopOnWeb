@@ -9,48 +9,30 @@ using System.Collections.ObjectModel;
 
 namespace eShopOnWeb.Test.StepDefinitions
 {
-
     [Binding]
     public class InvalidLoginStepDefinitions : logInTestingStepDefinitions
     {
-
-
-        String password => driver.FindElement(By.Id("Input_Password")).GetAttribute("value");
+        String fieldPassword => driver.FindElement(By.Id("Input_Password")).GetAttribute("value");
         String fieldEmail => driver.FindElement(By.Id("Input_Email")).GetAttribute("value");
+
+        private LogInPage logInpg = new LogInPage();
 
         [Then(@"Error message (.*) appears")]
         public void ThenErrorMessageInvalidLoginAttempt_Appears(String ErrorMsg)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-           ReadOnlyCollection <IWebElement> currentErrorMsg = driver.FindElements(By.XPath("//div[@class='text-danger validation-summary-errors']/ul/li"));
-            int num = currentErrorMsg.Count();
-            if (currentErrorMsg.Count.Equals(1) || ErrorMsg.Contains("Email"))
-            {
-                Assert.AreEqual(ErrorMsg, currentErrorMsg[0].Text);
-            }
-            else if (ErrorMsg.Contains("Password"))
-            {
-                Assert.AreEqual(ErrorMsg, currentErrorMsg[1].Text);
-            }
-            
+            logInpg.checkErrorMsg(driver, ErrorMsg);
         }
 
         [Then(@"Another error message appears below the field Password: (.*)")]
         public void ThenAnotherErrorMessageAppears_BelowTheFieldPassword(String ErrorMsg)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            var currentErrorMsg = wait.Until(driver =>
-                driver.FindElement(By.XPath("/html/body/div/div/div/div/section/form/div[3]/span/span")));
-            Assert.AreEqual(ErrorMsg, currentErrorMsg.Text);
+           logInpg.checkMsgBelowFieldPasswordl(driver, ErrorMsg);
         }
 
         [Then(@"Another error message appears below the field Email: (.*)")]
         public void ThenAnotherErrorMessageAppearsBelowTheFieldEmail(String ErrorMsg)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            var currentErrorMsg = wait.Until(driver =>
-                driver.FindElement(By.XPath("/html/body/div/div/div/div/section/form/div[2]/span/span")));
-            Assert.AreEqual(ErrorMsg, currentErrorMsg.Text);
+            logInpg.checkMsgBelowFieldEmail(driver, ErrorMsg);
         }
 
 
@@ -63,7 +45,7 @@ namespace eShopOnWeb.Test.StepDefinitions
         [Then(@"Field Password is blanked out")]
         public void ThenFiledPasswordIsBlankedOut()
         {
-            Assert.IsEmpty(password);
+            Assert.IsEmpty(fieldPassword);
             driver.Quit();
 
         }
@@ -77,7 +59,7 @@ namespace eShopOnWeb.Test.StepDefinitions
         [Then(@"Field Password is not blanked out")]
         public void ThenFiledPasswordIsNotBlankedOut()
         {            
-            Assert.IsNotEmpty(password);
+            Assert.IsNotEmpty(fieldPassword);
             driver.Quit();
         }
 

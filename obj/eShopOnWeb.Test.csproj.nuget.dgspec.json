@@ -40,6 +40,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "ExtentReports.Core": {
+              "target": "Package",
+              "version": "[1.0.3, )"
+            },
             "FluentAssertions": {
               "target": "Package",
               "version": "[6.2.0, )"
@@ -52,6 +56,10 @@
               "target": "Package",
               "version": "[4.1.0, )"
             },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[108.0.1, )"
+            },
             "Selenium.Support": {
               "target": "Package",
               "version": "[4.4.0, )"
@@ -63,6 +71,14 @@
             "Selenium.WebDriver.ChromeDriver": {
               "target": "Package",
               "version": "[105.0.5195.1900, )"
+            },
+            "Selenium.WebDriver.GeckoDriver.Win64": {
+              "target": "Package",
+              "version": "[0.31.0, )"
+            },
+            "Selenium.WebDriver.MSEdgeDriver": {
+              "target": "Package",
+              "version": "[104.0.1293.70, )"
             },
             "SpecFlow.Assist.Dynamic": {
               "target": "Package",
